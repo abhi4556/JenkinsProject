@@ -1,0 +1,21 @@
+pipeline {
+agent any
+environment{
+    SHARED_VALUES = ''
+}
+stages {
+    stage('Dev') {
+        steps {
+            script{
+            env.SHARED_VALUES="dev_value"
+            }
+            echo "Shared value in dev ${env.SHARED_VALUES}"
+        }
+    }
+    stage('Stage'){
+        steps {
+        echo "Shared value in stage ${env.SHARED_VALUES}"
+        }
+    }
+}
+}
