@@ -5,9 +5,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout to a specific branch
                 echo "Pulling shared-library branch"
-                checkout([$class: 'GitSCM', branches: [[name: 'shared-library']], userRemoteConfigs: [[url: 'https://github.com/abhi4556/JenkinsProject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'shared-library']]])
             }
         }
         stage('Greeting') {
@@ -26,3 +25,4 @@ pipeline {
         }
     }
 }
+
