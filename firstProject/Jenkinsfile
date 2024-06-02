@@ -1,21 +1,21 @@
 pipeline {
-agent any 
-environment {
-    SHARED_VALUES = ''
-}
-stages {
-    stage('Dev') {
-        steps {
-            script {
-            env.SHARED_VALUES = "dev_value"
+    agent any 
+    environment {
+        SHARED_VALUES = ''  // Initialize the environment variable
+    }
+    stages {
+        stage('Dev') {
+            steps {
+                script {
+                    env.SHARED_VALUES = "dev_value"  // Set the environment variable
+                }
+                echo "Shared value in dev ${env.SHARED_VALUES}"
             }
-            echo "Shared value in dev ${env.SHARED_VALUES}"
+        }
+        stage('Stage') {
+            steps {
+                echo "Shared value in stage ${env.SHARED_VALUES}"  // Access the shared environment variable
+            }
         }
     }
-    stage('Stage') {
-        steps {
-        echo "Shared value in stage ${env.SHARED_VALUES}"
-        }
-    }
-}
 }
