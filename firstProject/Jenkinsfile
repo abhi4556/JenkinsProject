@@ -1,21 +1,21 @@
 pipeline {
-agent any 
-environment {
-    SHARED_VALUES = ''
-}
-stages {
-    stage('Dev') {
-        steps {
-            script {
-            env.SHARED_VALUES = "dev_value"
+    agent any
+    stages {
+        stage('Dev') {
+            steps {
+                script {
+                    writeFile file: 'sharedValues.txt', text: 'dev_value'
+                }
+                echo "Shared value in dev dev_value"
             }
-            echo "Shared value in dev ${env.SHARED_VALUES}"
+        }
+        stage('Stage') {
+            steps {
+                script {
+                    def sharedValues = readFile('sharedValues.txt').trim()
+                    echo "Shared value in stage ${sharedValues}"
+                }
+            }
         }
     }
-    stage('Stage') {
-        steps {
-        echo "Shared value in stage ${env.SHARED_VALUES}"
-        }
-    }
-}
 }
