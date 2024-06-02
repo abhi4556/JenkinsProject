@@ -1,20 +1,20 @@
 pipeline {
-    agent any 
-    environment {
-        SHARED_VALUES = ''  // Initialize the environment variable
-    }
+    agent any
     stages {
         stage('Dev') {
             steps {
                 script {
-                    env.SHARED_VALUES = "dev_value"  // Set the environment variable
+                    writeFile file: 'sharedValues.txt', text: 'dev_value'
                 }
-                echo "Shared value in dev ${env.SHARED_VALUES}"
+                echo "Shared value in dev dev_value"
             }
         }
         stage('Stage') {
             steps {
-                echo "Shared value in stage ${env.SHARED_VALUES}"  // Access the shared environment variable
+                script {
+                    def sharedValues = readFile('sharedValues.txt').trim()
+                    echo "Shared value in stage ${sharedValues}"
+                }
             }
         }
     }
