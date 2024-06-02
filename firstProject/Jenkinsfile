@@ -3,12 +3,6 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
-            steps {
-                echo "Pulling shared-library branch"
-                checkout([$class: 'GitSCM', branches: [[name: 'shared-library']]])
-            }
-        }
         stage('Greeting') {
             steps {
                 script {
