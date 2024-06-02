@@ -1,20 +1,19 @@
+def sharedValues = ""
+
 pipeline {
     agent any
     stages {
         stage('Dev') {
             steps {
                 script {
-                    writeFile file: 'sharedValues.txt', text: 'dev_value'
+                    sharedValues = "dev_value"
                 }
-                echo "Shared value in dev dev_value"
+                echo "Shared value in dev ${sharedValues}"
             }
         }
         stage('Stage') {
             steps {
-                script {
-                    def sharedValues = readFile('sharedValues.txt').trim()
-                    echo "Shared value in stage ${sharedValues}"
-                }
+                echo "Shared value in stage ${sharedValues}"
             }
         }
     }
