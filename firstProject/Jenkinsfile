@@ -3,6 +3,13 @@
 pipeline {
     agent any
     stages {
+            stages {
+        stage('Checkout') {
+            steps {
+                // Checkout to a specific branch
+                checkout([$class: 'GitSCM', branches: [[name: 'shared-library']], userRemoteConfigs: [[url: 'https://github.com/abhi4556/JenkinsProject.git']]])
+            }
+        }
         stage('Greeting') {
             steps {
                 script {
