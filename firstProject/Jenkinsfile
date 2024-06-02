@@ -1,19 +1,20 @@
-def sharedValues = ""
+@Library('shared-library') _
 
 pipeline {
     agent any
     stages {
-        stage('Dev') {
+        stage('Greeting') {
             steps {
                 script {
-                    sharedValues = "dev_value"
+                    // Call the default function
+                    greet('Jenkins')
+
+                    // Call the farewell function
+                    greet.farewell('Jenkins')
+
+                    // Call the personalizedGreeting function
+                    greet.personalizedGreeting('Jenkins', 'Hope you are enjoying Jenkins!')
                 }
-                echo "Shared value in dev ${sharedValues}"
-            }
-        }
-        stage('Stage') {
-            steps {
-                echo "Shared value in stage ${sharedValues}"
             }
         }
     }
